@@ -1,0 +1,15 @@
+export const colors = {
+  cream: '#FFF8F0',
+  creamDark: '#F5EBE0',
+  orange: '#E85D04',
+  orangeLight: '#F48C06',
+  amber: '#FFBA08',
+  ember: '#DC2F02',
+  charcoal: '#2D2A26',
+  muted: '#6B6560',
+  white: '#FFFFFF',
+  bubbleFill: '#FFE8D6',
+  bubbleBorder: '#F48C06',
+  likeGreen: '#2D6A4F',
+  passGray: '#495057',
+};

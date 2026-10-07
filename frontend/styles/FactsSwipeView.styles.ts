@@ -1,31 +1,14 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../theme/colors';
+import { StyleSheet } from "react-native";
 
 export const factsSwipeViewStyles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'center',
+    position: "relative", // Enables absolute positioning for children
+    width: "100%",
+    height: "100%",
   },
-  bubbleGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: 10,
-    paddingHorizontal: 8,
-  },
-  nameTag: {
-    alignSelf: 'center',
-    marginBottom: 16,
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    borderRadius: 999,
-    backgroundColor: colors.white,
-    borderWidth: 2,
-    borderColor: colors.orangeLight,
-  },
-  nameText: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: colors.charcoal,
+  absoluteBubble: {
+    position: "absolute",
+    alignSelf: "flex-start",
   },
 });

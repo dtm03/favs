@@ -1,7 +1,7 @@
-import { View } from 'react-native';
-import { Button } from 'react-native-paper';
-import { bottomTabBarStyles } from '../styles/BottomTabBar.styles';
-import type { MainTab } from '../navigation/types';
+import { View } from "react-native";
+import { IconButton } from "react-native-paper";
+import { bottomTabBarStyles } from "../styles/BottomTabBar.styles";
+import type { MainTab } from "../navigation/types";
 
 type Props = {
   activeTab: MainTab;
@@ -11,22 +11,18 @@ type Props = {
 export function BottomTabBar({ activeTab, onChange }: Props) {
   return (
     <View style={bottomTabBarStyles.bar}>
-      <Button
-        mode={activeTab === 'chats' ? 'contained' : 'outlined'}
-        onPress={() => onChange('chats')}
-        style={bottomTabBarStyles.tab}
+      <IconButton
         icon="message-text"
-      >
-        Chats
-      </Button>
-      <Button
-        mode={activeTab === 'swipe' ? 'contained' : 'outlined'}
-        onPress={() => onChange('swipe')}
-        style={bottomTabBarStyles.tab}
-        icon="heart"
-      >
-        Swipen
-      </Button>
+        iconColor={activeTab === "chats" ? "#FF6B00" : "#888888"}
+        size={28}
+        onPress={() => onChange("chats")}
+      />
+      <IconButton
+        icon="cards-outline"
+        iconColor={activeTab === "swipe" ? "#FF6B00" : "#888888"}
+        size={28}
+        onPress={() => onChange("swipe")}
+      />
     </View>
   );
 }

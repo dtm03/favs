@@ -74,23 +74,19 @@ export function SwipeScreen() {
 
           if (current === "favs") {
             if (dy > 80) {
-              // Nach unten wischen = Fotos freischalten
               runOnJS(revealPhotos)();
             } else if (dy < -80) {
-              // Nach oben wischen = Profil ablehnen & direkt zum nächsten springen
               runOnJS(passProfile)();
             }
             return;
           }
 
-          // Horizontal durch die Fotos wischen (ohne Crash)
           if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
             const delta = dx > 0 ? -1 : 1;
             runOnJS(changePhoto)(delta);
             return;
           }
 
-          // Vertikal in der Fotos-Ansicht
           if (dy > 80) {
             runOnJS(likeProfile)();
           } else if (dy < -80) {
@@ -100,15 +96,16 @@ export function SwipeScreen() {
     [changePhoto, likeProfile, passProfile, revealPhotos, stage],
   );
 
-  const hint =
-    stage === "favs"
-      ? "Nach unten = Fotos anzeigen · Nach oben = Weiter"
-      : "Links/Rechts = Fotos · Nach unten = Like · Nach oben = Weiter";
-
   return (
     <View style={swipeScreenStyles.container}>
-      <Text style={swipeScreenStyles.title}>Entdecken</Text>
-      <Text style={swipeScreenStyles.hint}>{hint}</Text>
+      {/* Title with Name and Age */}
+      <Text style={swipeScreenStyles.title}>
+        {currentProfile.name}, {currentProfile.age}
+      </Text>
+
+      {/* Subtitle / Hint with Bio */}
+      <Text style={swipeScreenStyles.hint}>{currentProfile.bio}</Text>
+
       <GestureDetector gesture={pan}>
         <View style={swipeScreenStyles.cardArea}>
           {stage === "favs" ? (
@@ -119,6 +116,7 @@ export function SwipeScreen() {
           <PackRevealOverlay visible={showReveal} onFinish={onRevealFinish} />
         </View>
       </GestureDetector>
+
       <Snackbar
         visible={!!snack}
         onDismiss={() => setSnack(null)}

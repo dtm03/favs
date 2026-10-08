@@ -7,8 +7,7 @@ export const bottomTabBarStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 16,
-    paddingVertical: 16,
-    paddingBottom: 24,
+    paddingTop: 8,
     backgroundColor: colors.cream,
   },
   tab: {

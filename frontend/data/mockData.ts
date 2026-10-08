@@ -59,9 +59,10 @@ export const sampleProfile: Profile = {
     { category: "Restaurant", value: "Cookies Cream" },
   ],
   photoUrls: [
-    "https://picsum.photos/seed/favs1/600/800",
-    "https://picsum.photos/seed/favs2/600/800",
-    "https://picsum.photos/seed/favs3/600/800",
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
   ],
 };
 
@@ -84,9 +85,9 @@ export const peterProfile: Profile = {
     { category: "Restaurant", value: "Sushi Koi" },
   ],
   photoUrls: [
-    "https://picsum.photos/seed/peter1/600/800",
-    "https://picsum.photos/seed/peter2/600/800",
-    "https://picsum.photos/seed/peter3/600/800",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=800&q=80",
   ],
 };
 

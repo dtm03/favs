@@ -4,18 +4,29 @@ import { colors } from "../theme/colors";
 export const swipeScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 32,
+    paddingHorizontal: 32,
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+    gap: 12,
+  },
+  headerTextContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
   title: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: colors.charcoal,
-    marginBottom: 8,
+    fontSize: 24,
+    fontWeight: "800",
+    color: colors.orange,
   },
   hint: {
     color: colors.muted,
     fontSize: 13,
-    marginBottom: 12,
+    marginTop: 2,
+    fontWeight: "500",
   },
   cardArea: {
     flex: 1,

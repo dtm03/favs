@@ -9,8 +9,10 @@ type Props = {
 export function FactBubble({ item }: Props) {
   return (
     <View style={factBubbleStyles.bubble}>
-      <Text style={factBubbleStyles.category}>{item.category}</Text>
-      <Text style={factBubbleStyles.value} numberOfLines={2}>
+      <Text style={factBubbleStyles.category} numberOfLines={1}>
+        {item.category}
+      </Text>
+      <Text style={factBubbleStyles.value} numberOfLines={1} ellipsizeMode="tail">
         {item.value}
       </Text>
     </View>

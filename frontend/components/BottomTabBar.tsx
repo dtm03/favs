@@ -6,11 +6,12 @@ import type { MainTab } from "../navigation/types";
 type Props = {
   activeTab: MainTab;
   onChange: (tab: MainTab) => void;
+  bottomInset?: number;
 };
 
-export function BottomTabBar({ activeTab, onChange }: Props) {
+export function BottomTabBar({ activeTab, onChange, bottomInset = 0 }: Props) {
   return (
-    <View style={bottomTabBarStyles.bar}>
+    <View style={[bottomTabBarStyles.bar, { paddingBottom: bottomInset + 16 }]}>
       <IconButton
         icon="message-text"
         iconColor={activeTab === "chats" ? "#FF6B00" : "#888888"}

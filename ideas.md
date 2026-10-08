@@ -12,3 +12,8 @@
 - Bubble Effekt beim runterswipen wie bei Fifa Pack Opennings so Surprise Moment
 - dann normaler datingapp look mit farbpalette und abgerundeten ecken bei den bildern
 - sehr moderner cleaner look, ui komponenten aus passender bibliothek bitte
+
+## TODOS
+
+- random bubble assortment without overlaps and full text of the bubbles, size can also very maximum of like 15 bubbles or so
+- bubble style and cooler background for swipe screen

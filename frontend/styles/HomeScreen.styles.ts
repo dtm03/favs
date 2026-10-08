@@ -6,14 +6,6 @@ export const homeScreenStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.cream,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 8,
-    paddingBottom: 4,
-  },
   content: {
     flex: 1,
   },

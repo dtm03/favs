@@ -12,4 +12,20 @@ export const colors = {
   bubbleBorder: '#F48C06',
   likeGreen: '#2D6A4F',
   passGray: '#495057',
+
+  // iOS Liquid Glass design tokens (warm amber/orange caustic glass)
+  glass: {
+    tintStart: 'rgba(255, 250, 244, 0.75)',
+    tintMid: 'rgba(255, 225, 195, 0.42)',
+    tintEnd: 'rgba(255, 140, 26, 0.22)',
+    specularStart: 'rgba(255, 255, 255, 0.85)',
+    specularMid: 'rgba(255, 255, 255, 0.20)',
+    borderTop: 'rgba(255, 255, 255, 0.95)',
+    borderLeft: 'rgba(255, 255, 255, 0.65)',
+    borderRight: 'rgba(244, 140, 6, 0.35)',
+    borderBottom: 'rgba(220, 47, 2, 0.28)',
+    shadow: '#E85D04',
+    textCategory: '#DC2F02',
+    textValue: '#1F1B18',
+  },
 };

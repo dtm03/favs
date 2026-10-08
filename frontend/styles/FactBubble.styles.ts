@@ -1,35 +1,32 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../theme/colors';
 
 export const factBubbleStyles = StyleSheet.create({
-  bubble: {
-    paddingHorizontal: 14,
-    paddingVertical: 9,
-    borderRadius: 999,
-    backgroundColor: colors.bubbleFill,
-    borderWidth: 1.5,
-    borderColor: colors.bubbleBorder,
+  bubbleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: colors.orange,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.12,
-    shadowRadius: 5,
-    elevation: 3,
+  },
+  bubbleContent: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 104,
   },
   category: {
-    fontSize: 10,
-    fontWeight: '700',
+    fontSize: 9.5,
+    fontWeight: '800',
     textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    color: colors.orange,
+    letterSpacing: 0.8,
+    color: '#DC2F02',
     marginBottom: 2,
     textAlign: 'center',
+    opacity: 0.95,
   },
   value: {
-    fontSize: 13.5,
+    fontSize: 14,
     fontWeight: '700',
-    color: colors.charcoal,
+    color: '#1C1917',
     textAlign: 'center',
+    letterSpacing: -0.2,
   },
 });

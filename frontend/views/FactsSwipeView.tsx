@@ -20,9 +20,9 @@ function estimateBubbleSize(fav: FavItem) {
   const catLen = fav.category.length * 7.5;
   const valLen = fav.value.length * 8.5;
   const textWidth = Math.max(catLen, valLen);
-  // Clamped width: between 110 and 160 px, height 52 px
-  const width = Math.min(160, Math.max(112, Math.round(textWidth + 34)));
-  const height = 52;
+  // Clamped width: between 116 and 165 px, height 54 px
+  const width = Math.min(165, Math.max(116, Math.round(textWidth + 38)));
+  const height = 54;
   return { width, height };
 }
 
@@ -182,7 +182,7 @@ export function FactsSwipeView({ profile }: Props) {
                 },
               ]}
             >
-              <FactBubble item={fav} />
+              <FactBubble item={fav} shapeIndex={index} />
             </View>
           );
         })}

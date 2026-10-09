@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../theme/colors';
+import { StyleSheet } from "react-native";
+import { colors } from "../theme/colors";
 
 export const chatsScreenStyles = StyleSheet.create({
   container: {
@@ -9,18 +9,18 @@ export const chatsScreenStyles = StyleSheet.create({
     paddingBottom: 0,
   },
   headerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 16,
   },
   title: {
     fontSize: 28,
-    fontWeight: '700',
-    color: colors.charcoal,
+    fontWeight: "800",
+    color: colors.orange,
   },
   list: {
-    gap: 10,
+    gap: 14,
     paddingBottom: 20,
   },
 });

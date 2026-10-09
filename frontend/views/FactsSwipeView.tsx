@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
+import type { SharedValue } from 'react-native-reanimated';
+import { BubbleFloatExit } from '../components/BubbleFloatExit';
 import { FactBubble } from '../components/FactBubble';
 import { SwayingBubble } from '../components/SwayingBubble';
 import type { FavItem, Profile } from '../data/mockData';
@@ -8,6 +10,7 @@ import { bubbleShapeForFav, pseudoRandom } from '../theme/bubbleShapes';
 
 type Props = {
   profile: Profile;
+  exitProgress?: SharedValue<number>;
 };
 
 type BubbleBox = {
@@ -147,7 +150,7 @@ function calculateBubblePositions(
   return boxes;
 }
 
-export function FactsSwipeView({ profile }: Props) {
+export function FactsSwipeView({ profile, exitProgress }: Props) {
   const [layout, setLayout] = useState<{ width: number; height: number } | null>(null);
 
   const handleLayout = (event: LayoutChangeEvent) => {
@@ -176,19 +179,51 @@ export function FactsSwipeView({ profile }: Props) {
           const motionSeed =
             profile.id.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 42) + index * 31;
 
+          const positionedStyle = [
+            factsSwipeViewStyles.absoluteBubble,
+            {
+              left: pos.left,
+              top: pos.top,
+              width: pos.width,
+              height: pos.height,
+            },
+          ];
+
+          const floatDistance = (layout?.height ?? 420) * 0.65 + 48;
+
+          const bubbleContent = (
+            <SwayingBubble
+              motionSeed={motionSeed}
+              style={{ width: pos.width, height: pos.height }}
+            >
+              <FactBubble
+                item={fav}
+                width={pos.width}
+                height={pos.height}
+                cornerRadii={pos.cornerRadii}
+              />
+            </SwayingBubble>
+          );
+
+          if (exitProgress) {
+            return (
+              <BubbleFloatExit
+                key={`${profile.id}-${fav.category}`}
+                exitProgress={exitProgress}
+                motionSeed={motionSeed}
+                floatDistance={floatDistance}
+                style={positionedStyle}
+              >
+                {bubbleContent}
+              </BubbleFloatExit>
+            );
+          }
+
           return (
             <SwayingBubble
               key={`${profile.id}-${fav.category}`}
               motionSeed={motionSeed}
-              style={[
-                factsSwipeViewStyles.absoluteBubble,
-                {
-                  left: pos.left,
-                  top: pos.top,
-                  width: pos.width,
-                  height: pos.height,
-                },
-              ]}
+              style={positionedStyle}
             >
               <FactBubble
                 item={fav}

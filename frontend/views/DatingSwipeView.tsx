@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ActivityIndicator, Image, Pressable, Text, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { ActivityIndicator, Image, Pressable, View } from 'react-native';
 import type { Profile } from '../data/mockData';
 import { datingSwipeViewStyles } from '../styles/DatingSwipeView.styles';
 import { colors } from '../theme/colors';
@@ -28,28 +27,12 @@ export function DatingSwipeView({
   return (
     <View style={datingSwipeViewStyles.wrapper}>
       <View style={datingSwipeViewStyles.photoCard}>
-        {/* Story progress indicators at the top */}
-        <View style={datingSwipeViewStyles.storyBars} pointerEvents="box-none">
-          {photos.map((_, i) => (
-            <Pressable
-              key={`bar-${i}`}
-              style={[
-                datingSwipeViewStyles.storyBar,
-                i === safeIndex && datingSwipeViewStyles.storyBarActive,
-              ]}
-              onPress={() => onSelectPhoto(i)}
-            />
-          ))}
-        </View>
-
-        {/* Loading Spinner */}
         {loading && (
           <View style={datingSwipeViewStyles.loadingContainer}>
             <ActivityIndicator size="large" color={colors.orange} />
           </View>
         )}
 
-        {/* Profile Photo */}
         <Image
           source={{ uri: currentUrl }}
           style={datingSwipeViewStyles.photo}
@@ -58,7 +41,6 @@ export function DatingSwipeView({
           onLoadEnd={() => setLoading(false)}
         />
 
-        {/* Touch zones for left / right navigation */}
         <View style={datingSwipeViewStyles.tapZoneContainer}>
           <Pressable
             style={datingSwipeViewStyles.tapLeft}
@@ -74,41 +56,18 @@ export function DatingSwipeView({
           />
         </View>
 
-        {/* Info Gradient Overlay at Bottom */}
-        <LinearGradient
-          colors={['transparent', 'rgba(30, 27, 24, 0.88)']}
-          style={datingSwipeViewStyles.overlay}
-          pointerEvents="none"
-        >
-          <Text style={datingSwipeViewStyles.name}>
-            {profile.name}, {profile.age}
-          </Text>
-          <Text style={datingSwipeViewStyles.meta}>
-            {profile.city} · {profile.bio}
-          </Text>
-          <Text style={datingSwipeViewStyles.photoHint}>
-            Foto {safeIndex + 1} von {photos.length} · Tippe zum Wechseln
-          </Text>
-        </LinearGradient>
-      </View>
-
-      {/* Clickable Dots beneath the photo */}
-      <View style={datingSwipeViewStyles.dots}>
-        {photos.map((_, i) => (
-          <Pressable
-            key={`dot-${i}`}
-            onPress={() => onSelectPhoto(i)}
-            style={datingSwipeViewStyles.dotPressable}
-            hitSlop={8}
-          >
-            <View
+        <View style={datingSwipeViewStyles.storyBars} pointerEvents="box-none">
+          {photos.map((_, i) => (
+            <Pressable
+              key={`bar-${i}`}
               style={[
-                datingSwipeViewStyles.dot,
-                i === safeIndex && datingSwipeViewStyles.dotActive,
+                datingSwipeViewStyles.storyBar,
+                i === safeIndex && datingSwipeViewStyles.storyBarActive,
               ]}
+              onPress={() => onSelectPhoto(i)}
             />
-          </Pressable>
-        ))}
+          ))}
+        </View>
       </View>
     </View>
   );

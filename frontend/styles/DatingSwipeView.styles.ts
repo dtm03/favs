@@ -33,7 +33,7 @@ export const datingSwipeViewStyles = StyleSheet.create({
   },
   storyBars: {
     position: 'absolute',
-    top: 10,
+    bottom: 12,
     left: 12,
     right: 12,
     flexDirection: 'row',
@@ -61,51 +61,5 @@ export const datingSwipeViewStyles = StyleSheet.create({
   tapRight: {
     width: '60%',
     height: '100%',
-  },
-  overlay: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 20,
-    paddingTop: 48,
-    zIndex: 6,
-  },
-  name: {
-    fontSize: 26,
-    fontWeight: '800',
-    color: colors.white,
-  },
-  meta: {
-    fontSize: 14,
-    color: 'rgba(255,255,255,0.92)',
-    marginTop: 4,
-    lineHeight: 18,
-  },
-  photoHint: {
-    fontSize: 11,
-    color: 'rgba(255, 255, 255, 0.75)',
-    marginTop: 6,
-    fontWeight: '600',
-  },
-  dots: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-    marginTop: 14,
-  },
-  dotPressable: {
-    padding: 4,
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.creamDark,
-  },
-  dotActive: {
-    backgroundColor: colors.orange,
-    width: 22,
   },
 });

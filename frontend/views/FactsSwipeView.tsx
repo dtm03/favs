@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
 import { FactBubble } from '../components/FactBubble';
+import { SwayingBubble } from '../components/SwayingBubble';
 import type { FavItem, Profile } from '../data/mockData';
 import { factsSwipeViewStyles } from '../styles/FactsSwipeView.styles';
+import { bubbleShapeForFav, pseudoRandom } from '../theme/bubbleShapes';
 
 type Props = {
   profile: Profile;
@@ -13,23 +15,18 @@ type BubbleBox = {
   top: number;
   width: number;
   height: number;
+  cornerRadii: number;
 };
 
-// Estimates rendered size of a bubble based on its text content
-function estimateBubbleSize(fav: FavItem) {
-  const catLen = fav.category.length * 7.5;
-  const valLen = fav.value.length * 8.5;
-  const textWidth = Math.max(catLen, valLen);
-  // Clamped width: between 116 and 165 px, height 54 px
-  const width = Math.min(165, Math.max(116, Math.round(textWidth + 38)));
-  const height = 54;
-  return { width, height };
-}
-
-// Pseudo-random float [0, 1) based on profile seed
-function pseudoRandom(seed: number) {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
+function estimateBubbleSize(
+  fav: FavItem,
+  profileId: string,
+  index: number,
+  containerWidth: number,
+) {
+  const padding = 10;
+  const maxBubbleWidth = Math.min(232, containerWidth - padding * 2);
+  return bubbleShapeForFav(profileId, index, fav, maxBubbleWidth);
 }
 
 function calculateBubblePositions(
@@ -52,7 +49,12 @@ function calculateBubblePositions(
   const tierHeight = usableHeight / rowCount;
 
   const boxes: BubbleBox[] = favs.map((fav, index) => {
-    const { width, height } = estimateBubbleSize(fav);
+    const { width, height, cornerRadii } = estimateBubbleSize(
+      fav,
+      profileId,
+      index,
+      containerWidth,
+    );
     const row = Math.floor(index / 2);
     const isRight = index % 2 === 1;
 
@@ -87,6 +89,7 @@ function calculateBubblePositions(
       top: Math.max(padding, Math.min(containerHeight - height - padding, baseTop)),
       width,
       height,
+      cornerRadii,
     };
   });
 
@@ -170,20 +173,30 @@ export function FactsSwipeView({ profile }: Props) {
         profile.favs.map((fav, index) => {
           const pos = positions[index];
           if (!pos) return null;
+          const motionSeed =
+            profile.id.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 42) + index * 31;
+
           return (
-            <View
+            <SwayingBubble
               key={`${profile.id}-${fav.category}`}
+              motionSeed={motionSeed}
               style={[
                 factsSwipeViewStyles.absoluteBubble,
                 {
                   left: pos.left,
                   top: pos.top,
-                  minWidth: pos.width,
+                  width: pos.width,
+                  height: pos.height,
                 },
               ]}
             >
-              <FactBubble item={fav} shapeIndex={index} />
-            </View>
+              <FactBubble
+                item={fav}
+                width={pos.width}
+                height={pos.height}
+                cornerRadii={pos.cornerRadii}
+              />
+            </SwayingBubble>
           );
         })}
     </View>

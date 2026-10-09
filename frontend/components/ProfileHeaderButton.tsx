@@ -1,7 +1,7 @@
-import { Pressable } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { profileHeaderButtonStyles } from '../styles/ProfileHeaderButton.styles';
-import { colors } from '../theme/colors';
+import { Pressable } from "react-native";
+import { IconButton } from "react-native-paper";
+import { profileHeaderButtonStyles } from "../styles/ProfileHeaderButton.styles";
+import { colors } from "../theme/colors";
 
 type Props = {
   onPress: () => void;
@@ -11,14 +11,18 @@ export function ProfileHeaderButton({ onPress }: Props) {
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [
-        profileHeaderButtonStyles.button,
-        pressed && { opacity: 0.85, transform: [{ scale: 0.96 }] },
-      ]}
+      hitSlop={8}
+      style={profileHeaderButtonStyles.button}
       accessibilityRole="button"
       accessibilityLabel="Profil anpassen"
     >
-      <MaterialCommunityIcons name="account-circle" size={28} color={colors.white} />
+      {({ pressed }) => (
+        <IconButton
+          icon="account"
+          iconColor={pressed ? colors.orange : colors.muted}
+          size={28}
+        />
+      )}
     </Pressable>
   );
 }

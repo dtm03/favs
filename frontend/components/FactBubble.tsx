@@ -5,26 +5,22 @@ import { factBubbleStyles } from '../styles/FactBubble.styles';
 
 type Props = {
   item: FavItem;
-  shapeIndex?: number;
+  width: number;
+  height: number;
+  cornerRadii: number;
 };
 
-export function FactBubble({ item, shapeIndex }: Props) {
-  const resolvedShapeIndex =
-    shapeIndex !== undefined
-      ? shapeIndex
-      : item.category.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
-
+export function FactBubble({ item, width, height, cornerRadii }: Props) {
   return (
     <LiquidGlassView
-      shapeIndex={resolvedShapeIndex}
-      intensity={40}
-      style={factBubbleStyles.bubbleContainer}
+      style={[factBubbleStyles.bubbleContainer, { width, height }]}
       contentStyle={factBubbleStyles.bubbleContent}
+      cornerRadii={cornerRadii}
     >
       <Text style={factBubbleStyles.category} numberOfLines={1}>
         {item.category}
       </Text>
-      <Text style={factBubbleStyles.value} numberOfLines={1} ellipsizeMode="tail">
+      <Text style={factBubbleStyles.value} numberOfLines={1}>
         {item.value}
       </Text>
     </LiquidGlassView>

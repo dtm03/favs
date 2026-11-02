@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../theme/colors";
 import { BUBBLE_PADDING_H } from "../theme/bubbleShapes";
+import { fonts } from "../theme/typography";
 
 export const factBubbleStyles = StyleSheet.create({
   bubbleContainer: {
@@ -11,21 +12,32 @@ export const factBubbleStyles = StyleSheet.create({
     paddingHorizontal: BUBBLE_PADDING_H,
     paddingVertical: 0,
   },
-  category: {
-    fontSize: 9.5,
-    fontWeight: "800",
-    textTransform: "uppercase",
-    letterSpacing: 0.8,
-    color: "#DC2F02",
+  categoryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 3,
     marginBottom: 2,
-    textAlign: "center",
+    maxWidth: "100%",
+  },
+  emoji: {
+    fontSize: 10,
+    lineHeight: 12,
+  },
+  category: {
+    flexShrink: 1,
+    fontSize: 9.5,
+    fontFamily: fonts.extraBold,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    color: "#DC2F02",
     opacity: 0.95,
   },
   value: {
     fontSize: 14,
-    fontWeight: "700",
+    fontFamily: fonts.bold,
     color: colors.muted,
     textAlign: "center",
-    letterSpacing: -0.2,
+    letterSpacing: 0,
   },
 });

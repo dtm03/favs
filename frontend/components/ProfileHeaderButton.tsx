@@ -18,9 +18,13 @@ export function ProfileHeaderButton({ onPress }: Props) {
     >
       {({ pressed }) => (
         <IconButton
+          pointerEvents="none"
           icon="account"
           iconColor={pressed ? colors.orange : colors.muted}
-          size={28}
+          size={26}
+          containerColor="transparent"
+          rippleColor="transparent"
+          style={profileHeaderButtonStyles.icon}
         />
       )}
     </Pressable>

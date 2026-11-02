@@ -1,11 +1,8 @@
 import React, { useMemo } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { BlurView } from 'expo-blur';
-import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../theme/colors';
-import { GlassView, isGlassEffectAPIAvailable } from 'expo-glass-effect';
 import { GlassLensStage } from './GlassLensStage';
-import { BUBBLE_GLASS_WASH, ORANGE_GLASS_TINT } from '../theme/glassTokens';
+import { NeutralGlassInterior } from './NeutralGlassInterior';
+import { isGlassEffectAPIAvailable } from 'expo-glass-effect';
 import type { BubbleCornerRadii } from '../theme/bubbleShapes';
 
 type Props = {
@@ -15,9 +12,7 @@ type Props = {
   cornerRadii?: BubbleCornerRadii;
 };
 
-/**
- * Fact-bubble glass: expo-glass-effect native material inside GlassLensStage (light orange).
- */
+/** Fact-bubble glass: neutral fill, orange rim + shadow on lens stage. */
 export function LiquidGlassView({
   children,
   style,
@@ -34,30 +29,7 @@ export function LiquidGlassView({
 
   return (
     <GlassLensStage variant="lightOrange" style={style} cornerRadii={cornerRadii}>
-      {glassAvailable ? (
-        <GlassView
-          glassEffectStyle="clear"
-          colorScheme="light"
-          tintColor={ORANGE_GLASS_TINT}
-          isInteractive
-          style={StyleSheet.absoluteFill}
-        />
-      ) : (
-        <BlurView intensity={32} tint="default" style={StyleSheet.absoluteFill} />
-      )}
-      <View style={styles.orangeWash} pointerEvents="none" />
-      <LinearGradient
-        colors={[
-          colors.glass.specularStart,
-          colors.glass.specularMid,
-          'rgba(255, 255, 255, 0)',
-        ]}
-        locations={[0, 0.28, 0.72]}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
-        style={styles.specular}
-        pointerEvents="none"
-      />
+      <NeutralGlassInterior glassAvailable={glassAvailable} />
       <View style={[styles.content, contentStyle]} pointerEvents="box-none">
         {children}
       </View>
@@ -66,15 +38,6 @@ export function LiquidGlassView({
 }
 
 const styles = StyleSheet.create({
-  specular: {
-    ...StyleSheet.absoluteFill,
-    zIndex: 1,
-    opacity: 0.72,
-  },
-  orangeWash: {
-    ...StyleSheet.absoluteFill,
-    backgroundColor: BUBBLE_GLASS_WASH,
-  },
   content: {
     zIndex: 2,
     position: 'relative',

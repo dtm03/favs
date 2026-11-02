@@ -1,46 +1,43 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../theme/colors';
+import { StyleSheet } from "react-native";
+import { colors } from "../theme/colors";
+import { fonts } from "../theme/typography";
 
 export const messageBubbleStyles = StyleSheet.create({
   row: {
     marginBottom: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   rowSent: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   rowReceived: {
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
   },
-  bubble: {
-    maxWidth: '78%',
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    borderRadius: 18,
-  },
-  sent: {
-    backgroundColor: colors.orange,
-    borderBottomRightRadius: 4,
-  },
-  received: {
-    backgroundColor: colors.white,
-    borderBottomLeftRadius: 4,
-    borderWidth: 1,
-    borderColor: colors.creamDark,
+  pillContent: {
+    paddingHorizontal: 22,
+    paddingVertical: 11,
   },
   text: {
     fontSize: 15,
-    lineHeight: 20,
+    lineHeight: 21,
+    fontFamily: fonts.regular,
   },
   textSent: {
     color: colors.white,
   },
   textReceived: {
-    color: colors.charcoal,
+    color: colors.muted,
   },
   time: {
     fontSize: 10,
+    fontFamily: fonts.medium,
     marginTop: 4,
-    opacity: 0.7,
+  },
+  timeSent: {
+    color: "rgba(255, 255, 255, 0.82)",
+  },
+  timeReceived: {
+    color: colors.muted,
+    opacity: 0.75,
   },
 });

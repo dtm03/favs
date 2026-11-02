@@ -22,9 +22,18 @@ export function ChatDetailScreen({ route }: Props) {
       <View style={chatDetailScreenStyles.inputRow}>
         <TextInput
           mode="outlined"
+          dense
           placeholder={`Nachricht an ${name}…`}
+          placeholderTextColor={colors.muted}
           style={chatDetailScreenStyles.input}
-          outlineColor={colors.creamDark}
+          outlineStyle={chatDetailScreenStyles.inputOutline}
+          contentStyle={{
+            paddingVertical: 0,
+            marginVertical: 0,
+            paddingHorizontal: 18,
+            lineHeight: 21,
+          }}
+          outlineColor={colors.orange}
           activeOutlineColor={colors.orange}
         />
       </View>

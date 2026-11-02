@@ -10,20 +10,17 @@ import Animated, {
 } from "react-native-reanimated";
 import { Snackbar } from "react-native-paper";
 import { profileQueue } from "../data/mockData";
+import { homeTabHeaderStyles } from "../styles/HomeTabHeader.styles";
 import { swipeScreenStyles } from "../styles/SwipeScreen.styles";
 import { FactsSwipeView } from "../views/FactsSwipeView";
 import { DatingSwipeView } from "../views/DatingSwipeView";
 
 type SwipeStage = "favs" | "photos";
 
-type Props = {
-  onOpenProfile: () => void;
-};
-
 const FAV_EXIT_MS = 7600;
 const PHOTO_RISE_MS = 1200;
 
-export function SwipeScreen({ onOpenProfile }: Props) {
+export function SwipeScreen() {
   const [stage, setStage] = useState<SwipeStage>("favs");
   const [isRevealing, setIsRevealing] = useState(false);
   const [photosReady, setPhotosReady] = useState(false);
@@ -196,15 +193,15 @@ export function SwipeScreen({ onOpenProfile }: Props) {
 
   return (
     <View style={swipeScreenStyles.container}>
-      <View style={swipeScreenStyles.headerRow}>
-        <View style={swipeScreenStyles.headerTextContainer}>
-          <Text style={swipeScreenStyles.title} numberOfLines={1}>
+      <View style={homeTabHeaderStyles.headerBlock}>
+        <View style={homeTabHeaderStyles.titleLine}>
+          <Text style={homeTabHeaderStyles.title} numberOfLines={1}>
             {titleText}
           </Text>
-          <Text style={swipeScreenStyles.hint} numberOfLines={2}>
-            {hintText}
-          </Text>
         </View>
+        <Text style={homeTabHeaderStyles.subtitle} numberOfLines={2}>
+          {hintText}
+        </Text>
       </View>
 
       <GestureDetector gesture={pan}>

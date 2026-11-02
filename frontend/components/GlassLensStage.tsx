@@ -1,8 +1,6 @@
 import React from "react";
 import { Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../theme/colors";
-import { BUBBLE_PLATE_COLORS } from "../theme/glassTokens";
 import {
   type BubbleCornerRadii,
   cornerRadiiToStyle,
@@ -23,10 +21,16 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   /** Stadium / circle radius (typically min(width, height) / 2) */
   cornerRadii?: BubbleCornerRadii;
-  variant?: "lightOrange";
+  variant?: "lightOrange" | "liquidClear" | "chatOrange";
 };
 
-function SoftShadowLayers({ borderRadius }: { borderRadius: number }) {
+function SoftShadowLayers({
+  borderRadius,
+  tint,
+}: {
+  borderRadius: number;
+  tint: "orange" | "neutral";
+}) {
   const lift = 5;
   return (
     <>
@@ -41,7 +45,10 @@ function SoftShadowLayers({ borderRadius }: { borderRadius: number }) {
             right: -spread,
             bottom: -spread - lift,
             borderRadius: borderRadius + spread,
-            backgroundColor: colors.orangeAlpha(opacity * 1.15),
+            backgroundColor:
+              tint === "orange"
+                ? colors.orangeAlpha(opacity * 1.15)
+                : `rgba(80, 72, 66, ${opacity * 0.9})`,
           }}
         />
       ))}
@@ -58,29 +65,36 @@ export function GlassLensStage({
   cornerRadii = 999,
   variant = "lightOrange",
 }: Props) {
+  const isLiquidClear = variant === "liquidClear";
   const isLightOrange = variant === "lightOrange";
+  const isChatOrange = variant === "chatOrange";
   const radiusStyle = cornerRadiiToStyle(cornerRadii);
   const shadowRadius = maxCornerRadius(cornerRadii);
+  const hasOrangeRim = isLightOrange || isChatOrange;
+  const sizeToContent = isLiquidClear || isChatOrange;
 
   return (
     <View style={[styles.host, style]}>
-      <View style={styles.shadowCast}>
-        {isLightOrange && Platform.OS !== "ios" ? (
-          <SoftShadowLayers borderRadius={shadowRadius} />
+      <View style={[styles.shadowCast, sizeToContent && styles.shadowCastContent]}>
+        {hasOrangeRim && Platform.OS !== "ios" ? (
+          <SoftShadowLayers borderRadius={shadowRadius} tint="orange" />
         ) : null}
-        <View style={[styles.shadowSurface, styles.frame, radiusStyle]}>
+        <View
+          style={[
+            styles.shadowSurface,
+            sizeToContent ? styles.frameContent : styles.frame,
+            radiusStyle,
+            hasOrangeRim ? styles.orangeShadow : styles.liquidClearShadow,
+          ]}
+        >
           <View
-            style={[styles.clip, styles.frame, radiusStyle, styles.rimBorder]}
+            style={[
+              sizeToContent ? styles.frameContent : styles.frame,
+              radiusStyle,
+              hasOrangeRim ? styles.clip : styles.clipBorderless,
+              hasOrangeRim && styles.rimBorder,
+            ]}
           >
-            {isLightOrange ? (
-              <LinearGradient
-                colors={[...BUBBLE_PLATE_COLORS]}
-                locations={[0, 0.45, 1]}
-                start={{ x: 0.5, y: 0 }}
-                end={{ x: 0.5, y: 1 }}
-                style={[styles.plate, radiusStyle]}
-              />
-            ) : null}
             {children}
           </View>
         </View>
@@ -99,6 +113,16 @@ const iosBubbleShadow = Platform.select({
   default: {},
 });
 
+const iosLiquidClearShadow = Platform.select({
+  ios: {
+    shadowColor: colors.muted,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+  },
+  default: {},
+});
+
 const styles = StyleSheet.create({
   host: {
     backgroundColor: "transparent",
@@ -108,8 +132,16 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  shadowCastContent: {
+    height: undefined,
+  },
+  frameContent: {
+    width: "100%",
+  },
   shadowSurface: {
     backgroundColor: "transparent",
+  },
+  orangeShadow: {
     ...iosBubbleShadow,
   },
   frame: {
@@ -122,10 +154,16 @@ const styles = StyleSheet.create({
     position: "relative",
     backgroundColor: "transparent",
   },
+  clipBorderless: {
+    overflow: "hidden",
+    borderWidth: 0,
+    position: "relative",
+    backgroundColor: "transparent",
+  },
   rimBorder: {
     borderColor: colors.orange,
   },
-  plate: {
-    ...StyleSheet.absoluteFill,
+  liquidClearShadow: {
+    ...iosLiquidClearShadow,
   },
 });

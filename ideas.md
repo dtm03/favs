@@ -15,5 +15,6 @@
 
 ## TODOS
 
-- random bubble assortment without overlaps and full text of the bubbles, size can also very maximum of like 15 bubbles or so
-- bubble style and cooler background for swipe screen
+- Zurück Buttons anpassen das Icons pressable sind kein Rand oder so
+- Chats Fenster anpassen hintergrudn genau wie auf anderen Screens
+- profil anpassen screen komplett überarbeiten bessere favs auswählen usw.

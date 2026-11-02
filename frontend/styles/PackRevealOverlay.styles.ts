@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
+import { fonts } from '../theme/typography';
 
 export const packRevealOverlayStyles = StyleSheet.create({
   overlay: {
@@ -19,8 +20,8 @@ export const packRevealOverlayStyles = StyleSheet.create({
   label: {
     marginTop: 16,
     fontSize: 22,
-    fontWeight: '800',
+    fontFamily: fonts.black,
     color: colors.orange,
-    letterSpacing: 1,
+    letterSpacing: 1.2,
   },
 });

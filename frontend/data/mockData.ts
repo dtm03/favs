@@ -1,5 +1,5 @@
 export type FavCategory =
-  | "Lieblingsessen"
+  | "Essen"
   | "Urlaubsort"
   | "Film"
   | "Serie"
@@ -47,7 +47,7 @@ export const sampleProfile: Profile = {
   city: "Berlin",
   bio: "Sucht jemanden für spontane Spaziergänge und gutes Essen.",
   favs: [
-    { category: "Lieblingsessen", value: "Ramen" },
+    { category: "Essen", value: "Ramen" },
     { category: "Urlaubsort", value: "Lissabon" },
     { category: "Film", value: "La La Land" },
     { category: "Serie", value: "Fleabag" },
@@ -73,7 +73,7 @@ export const peterProfile: Profile = {
   city: "Hamburg",
   bio: "Liebt Musikabende, Fahrradtouren und ehrliche Gespräche.",
   favs: [
-    { category: "Lieblingsessen", value: "Burger" },
+    { category: "Essen", value: "Burger" },
     { category: "Urlaubsort", value: "Reykjavík" },
     { category: "Film", value: "The Social Network" },
     { category: "Serie", value: "The Bear" },

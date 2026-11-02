@@ -45,7 +45,7 @@ export function HomeScreen({ navigation }: Props) {
               onOpenProfile={handleOpenProfile}
             />
           ) : (
-            <SwipeScreen onOpenProfile={handleOpenProfile} />
+            <SwipeScreen />
           )}
         </View>
         <BottomTabBar

@@ -1,109 +1,85 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { colors } from "../theme/colors";
-
-const cardRadius = 42;
-
-const iosCardShadow = Platform.select({
-  ios: {
-    shadowColor: colors.muted,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.08,
-    shadowRadius: 14,
-  },
-  default: {
-    elevation: 5,
-  },
-});
+import { fonts } from "../theme/typography";
 
 export const chatListItemStyles = StyleSheet.create({
-  shadowHost: {
-    borderRadius: cardRadius,
-    ...iosCardShadow,
-  },
-  pressed: {
-    opacity: 0.92,
-    transform: [{ scale: 0.985 }],
-  },
-  card: {
-    borderRadius: cardRadius,
-    overflow: "hidden",
-    borderWidth: StyleSheet.hairlineWidth * 2,
-    borderColor: "rgba(255, 255, 255, 0.85)",
-    backgroundColor: colors.white,
-  },
-  cardFill: {
-    ...StyleSheet.absoluteFill,
-  },
-  highlightEdge: {
-    position: "absolute",
-    top: 0,
-    left: 12,
-    right: 12,
-    height: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
-    zIndex: 1,
-  },
   row: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 14,
-    position: "relative",
-    zIndex: 2,
+    paddingVertical: 13,
+    paddingLeft: 12,
+    paddingRight: 20,
   },
   avatar: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: colors.orangeLight,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 12,
+    marginRight: 10,
     borderWidth: StyleSheet.hairlineWidth * 2,
     borderColor: "rgba(255, 255, 255, 0.65)",
   },
   avatarText: {
-    fontSize: 20,
-    fontWeight: "700",
+    fontSize: 17,
+    fontFamily: fonts.bold,
     color: colors.white,
   },
   body: {
     flex: 1,
+    minWidth: 0,
   },
-  topRow: {
+  lineRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 4,
+    alignItems: "center",
     gap: 8,
+  },
+  lineRowFirst: {
+    marginBottom: 2,
   },
   name: {
     flex: 1,
-    fontSize: 16,
-    fontWeight: "700",
-    color: colors.muted,
+    minWidth: 0,
+    fontSize: 15,
+    fontFamily: fonts.extraBold,
+    color: "#DC2F02",
+    opacity: 0.95,
   },
   time: {
+    minWidth: 58,
+    textAlign: "right",
     fontSize: 12,
+    fontFamily: fonts.medium,
     color: colors.muted,
     opacity: 0.85,
   },
   preview: {
+    flex: 1,
+    minWidth: 0,
     fontSize: 14,
+    fontFamily: fonts.regular,
     color: colors.muted,
     opacity: 0.9,
   },
+  badgeSlot: {
+    minWidth: 58,
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
   badge: {
-    marginLeft: 8,
-    minWidth: 22,
-    height: 22,
-    borderRadius: 11,
+    minWidth: 16,
+    height: 16,
+    borderRadius: 8,
     backgroundColor: colors.orange,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 6,
+    paddingHorizontal: 4,
   },
   badgeText: {
     color: colors.white,
-    fontSize: 11,
-    fontWeight: "700",
+    fontSize: 9,
+    fontFamily: fonts.bold,
+    lineHeight: 11,
   },
 });

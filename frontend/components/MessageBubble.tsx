@@ -1,13 +1,15 @@
 import { Text, View } from 'react-native';
 import type { ChatMessage } from '../data/mockData';
+import { MessageGlassPill } from './MessageGlassPill';
 import { messageBubbleStyles } from '../styles/MessageBubble.styles';
-import { colors } from '../theme/colors';
 
 type Props = {
   message: ChatMessage;
 };
 
 export function MessageBubble({ message }: Props) {
+  const tone = message.sent ? 'sent' : 'received';
+
   return (
     <View
       style={[
@@ -15,12 +17,7 @@ export function MessageBubble({ message }: Props) {
         message.sent ? messageBubbleStyles.rowSent : messageBubbleStyles.rowReceived,
       ]}
     >
-      <View
-        style={[
-          messageBubbleStyles.bubble,
-          message.sent ? messageBubbleStyles.sent : messageBubbleStyles.received,
-        ]}
-      >
+      <MessageGlassPill tone={tone} contentStyle={messageBubbleStyles.pillContent}>
         <Text
           style={[
             messageBubbleStyles.text,
@@ -30,11 +27,14 @@ export function MessageBubble({ message }: Props) {
           {message.text}
         </Text>
         <Text
-          style={[messageBubbleStyles.time, { color: message.sent ? colors.white : colors.muted }]}
+          style={[
+            messageBubbleStyles.time,
+            message.sent ? messageBubbleStyles.timeSent : messageBubbleStyles.timeReceived,
+          ]}
         >
           {message.time}
         </Text>
-      </View>
+      </MessageGlassPill>
     </View>
   );
 }

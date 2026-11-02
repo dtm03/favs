@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   Easing,
@@ -10,7 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Snackbar } from "react-native-paper";
 import { profileQueue } from "../data/mockData";
-import { homeTabHeaderStyles } from "../styles/HomeTabHeader.styles";
+import { ScreenHeader } from "../components/ScreenHeader";
 import { swipeScreenStyles } from "../styles/SwipeScreen.styles";
 import { FactsSwipeView } from "../views/FactsSwipeView";
 import { DatingSwipeView } from "../views/DatingSwipeView";
@@ -188,21 +188,12 @@ export function SwipeScreen() {
   const showFavs = stage === "favs" && (!isRevealing || !photosReady);
   const showPhotos = stage === "photos" || isRevealing;
 
-  const titleText = `${currentProfile.name}, ${currentProfile.age}`;
-  const hintText = `${currentProfile.bio}`;
-
   return (
     <View style={swipeScreenStyles.container}>
-      <View style={homeTabHeaderStyles.headerBlock}>
-        <View style={homeTabHeaderStyles.titleLine}>
-          <Text style={homeTabHeaderStyles.title} numberOfLines={1}>
-            {titleText}
-          </Text>
-        </View>
-        <Text style={homeTabHeaderStyles.subtitle} numberOfLines={2}>
-          {hintText}
-        </Text>
-      </View>
+      <ScreenHeader
+        title={`${currentProfile.name}, ${currentProfile.age}`}
+        subtitle={currentProfile.bio}
+      />
 
       <GestureDetector gesture={pan}>
         <View style={swipeScreenStyles.cardArea}>

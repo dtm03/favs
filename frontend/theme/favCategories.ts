@@ -11,6 +11,8 @@ export const FAV_CATEGORY_EMOJI: Record<FavCategory, string> = {
   Sprache: "🗣️",
   Bar: "🍸",
   Restaurant: "🍽️",
+  Tier: "🐾",
+  Buch: "📖",
 };
 
 export function favCategoryEmoji(category: FavCategory): string {

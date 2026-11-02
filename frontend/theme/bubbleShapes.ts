@@ -1,10 +1,6 @@
-import type { ViewStyle } from 'react-native';
 import type { FavItem } from '../data/mockData';
 
-/** Uniform radius only — always a stadium / circle capsule from width × height */
-export type BubbleCornerRadii = number;
-
-/** Must match `factBubbleStyles.bubbleContent` horizontal padding (each side) */
+/** Must match `pillContentStyles.centered` horizontal padding (each side) */
 export const BUBBLE_PADDING_H = 12;
 const WIDTH_SAFETY = 4;
 
@@ -109,14 +105,6 @@ export function bubbleShapeForFav(
   return {
     width,
     height,
-    cornerRadii: capsuleBorderRadius(width, height),
+    cornerRadius: capsuleBorderRadius(width, height),
   };
-}
-
-export function cornerRadiiToStyle(radii: BubbleCornerRadii): ViewStyle {
-  return { borderRadius: radii };
-}
-
-export function maxCornerRadius(radii: BubbleCornerRadii): number {
-  return radii;
 }

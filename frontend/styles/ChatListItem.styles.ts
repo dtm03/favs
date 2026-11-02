@@ -1,79 +1,68 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../theme/colors";
-import { fonts } from "../theme/typography";
+import { StyleSheet } from 'react-native';
+import { colors } from '../theme/colors';
+import { fonts } from '../theme/typography';
+
+const AVATAR_SIZE = 40;
+const META_COLUMN_WIDTH = 52;
 
 export const chatListItemStyles = StyleSheet.create({
   row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 13,
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingLeft: 12,
-    paddingRight: 20,
+    paddingRight: 18,
+    gap: 10,
   },
   avatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
+    borderRadius: AVATAR_SIZE / 2,
     backgroundColor: colors.orangeLight,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: StyleSheet.hairlineWidth * 2,
-    borderColor: "rgba(255, 255, 255, 0.65)",
+    borderColor: 'rgba(255, 255, 255, 0.65)',
   },
   avatarText: {
-    fontSize: 17,
+    fontSize: 16,
     fontFamily: fonts.bold,
     color: colors.white,
   },
   body: {
     flex: 1,
     minWidth: 0,
+    gap: 3,
   },
-  lineRow: {
-    flexDirection: "row",
-    alignItems: "center",
+  line: {
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
-  lineRowFirst: {
-    marginBottom: 2,
-  },
-  name: {
+  nameSlot: {
     flex: 1,
     minWidth: 0,
-    fontSize: 15,
-    fontFamily: fonts.extraBold,
-    color: "#DC2F02",
-    opacity: 0.95,
   },
   time: {
-    minWidth: 58,
-    textAlign: "right",
-    fontSize: 12,
-    fontFamily: fonts.medium,
-    color: colors.muted,
-    opacity: 0.85,
+    width: META_COLUMN_WIDTH,
+    textAlign: 'right',
   },
   preview: {
     flex: 1,
     minWidth: 0,
-    fontSize: 14,
-    fontFamily: fonts.regular,
-    color: colors.muted,
     opacity: 0.9,
   },
   badgeSlot: {
-    minWidth: 58,
-    alignItems: "flex-end",
-    justifyContent: "center",
+    width: META_COLUMN_WIDTH,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   badge: {
     minWidth: 16,
     height: 16,
     borderRadius: 8,
     backgroundColor: colors.orange,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 4,
   },
   badgeText: {

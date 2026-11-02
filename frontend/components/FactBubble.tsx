@@ -1,32 +1,35 @@
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import type { FavItem } from '../data/mockData';
 import { favCategoryEmoji } from '../theme/favCategories';
-import { LiquidGlassView } from './LiquidGlassView';
-import { factBubbleStyles } from '../styles/FactBubble.styles';
+import { Pill } from './Pill';
+import { PillHeading } from './PillHeading';
+import { pillContentStyles } from '../styles/PillContent.styles';
+import { textStyles } from '../theme/typography';
 
 type Props = {
   item: FavItem;
   width: number;
   height: number;
-  cornerRadii: number;
+  cornerRadius: number;
 };
 
-export function FactBubble({ item, width, height, cornerRadii }: Props) {
+/** Floating fav bubble on the swipe screen. */
+export function FactBubble({ item, width, height, cornerRadius }: Props) {
   return (
-    <LiquidGlassView
-      style={[factBubbleStyles.bubbleContainer, { width, height }]}
-      contentStyle={factBubbleStyles.bubbleContent}
-      cornerRadii={cornerRadii}
+    <Pill
+      height={height}
+      radius={cornerRadius}
+      elevated
+      style={{ width }}
+      contentStyle={pillContentStyles.centered}
     >
-      <View style={factBubbleStyles.categoryRow}>
-        <Text style={factBubbleStyles.emoji}>{favCategoryEmoji(item.category)}</Text>
-        <Text style={factBubbleStyles.category} numberOfLines={1}>
-          {item.category}
-        </Text>
-      </View>
-      <Text style={factBubbleStyles.value} numberOfLines={1}>
+      <PillHeading emoji={favCategoryEmoji(item.category)} label={item.category} />
+      <Text
+        style={[textStyles.pillValue, pillContentStyles.centeredValue]}
+        numberOfLines={1}
+      >
         {item.value}
       </Text>
-    </LiquidGlassView>
+    </Pill>
   );
 }

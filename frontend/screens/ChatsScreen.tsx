@@ -1,8 +1,8 @@
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { ChatListItem } from '../components/ChatListItem';
-import { ProfileHeaderButton } from '../components/ProfileHeaderButton';
+import { HeaderIconButton } from '../components/HeaderIconButton';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { chatPreviews } from '../data/mockData';
-import { homeTabHeaderStyles } from '../styles/HomeTabHeader.styles';
 import { chatsScreenStyles } from '../styles/ChatsScreen.styles';
 
 type Props = {
@@ -13,28 +13,26 @@ type Props = {
 export function ChatsScreen({ onOpenChat, onOpenProfile }: Props) {
   return (
     <View style={chatsScreenStyles.container}>
-      <View style={[homeTabHeaderStyles.headerBlock, chatsScreenStyles.headerInset]}>
-        <View style={homeTabHeaderStyles.titleLine}>
-          <Text
-            style={[
-              homeTabHeaderStyles.title,
-              homeTabHeaderStyles.titleWithTrailingSlot,
-            ]}
-            numberOfLines={1}
-          >
-            Chats
-          </Text>
-          <View style={homeTabHeaderStyles.headerTrailingAction}>
-            <ProfileHeaderButton onPress={onOpenProfile} />
-          </View>
-        </View>
-        <Text style={homeTabHeaderStyles.subtitle} numberOfLines={2}>
-          {' '}
-        </Text>
-      </View>
-      <ScrollView contentContainerStyle={chatsScreenStyles.list}>
+      <ScreenHeader
+        title="Chats"
+        action={
+          <HeaderIconButton
+            icon="account"
+            onPress={onOpenProfile}
+            accessibilityLabel="Profil anpassen"
+          />
+        }
+      />
+      <ScrollView
+        contentContainerStyle={chatsScreenStyles.list}
+        showsVerticalScrollIndicator={false}
+      >
         {chatPreviews.map((chat) => (
-          <ChatListItem key={chat.id} chat={chat} onPress={() => onOpenChat(chat.id, chat.name)} />
+          <ChatListItem
+            key={chat.id}
+            chat={chat}
+            onPress={() => onOpenChat(chat.id, chat.name)}
+          />
         ))}
       </ScrollView>
     </View>

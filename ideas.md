@@ -12,9 +12,3 @@
 - Bubble Effekt beim runterswipen wie bei Fifa Pack Opennings so Surprise Moment
 - dann normaler datingapp look mit farbpalette und abgerundeten ecken bei den bildern
 - sehr moderner cleaner look, ui komponenten aus passender bibliothek bitte
-
-## TODOS
-
-- Zurück Buttons anpassen das Icons pressable sind kein Rand oder so
-- Chats Fenster anpassen hintergrudn genau wie auf anderen Screens
-- profil anpassen screen komplett überarbeiten bessere favs auswählen usw.

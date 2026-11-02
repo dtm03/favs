@@ -1,27 +1,24 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../theme/colors';
-import { fonts } from '../theme/typography';
+import { CONTENT_HORIZONTAL_PADDING, LIST_TOP_INSET } from '../theme/layout';
+import { PILL_GAP } from '../theme/pills';
 
 export const profileEditScreenStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.cream,
-  },
   scroll: {
-    padding: 20,
-    paddingBottom: 40,
+    flex: 1,
+    backgroundColor: 'transparent',
   },
-  sectionTitle: {
-    fontSize: 17,
-    fontFamily: fonts.semiBold,
-    color: colors.orange,
-    marginTop: 20,
-    marginBottom: 8,
+  scrollContent: {
+    paddingHorizontal: CONTENT_HORIZONTAL_PADDING,
+    paddingTop: LIST_TOP_INSET,
+    paddingBottom: 32,
+    gap: PILL_GAP,
+    backgroundColor: 'transparent',
   },
-  chipRow: {
+  favGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 8,
+    gap: PILL_GAP,
+    width: '100%',
+    marginTop: 2,
   },
 });

@@ -14,7 +14,6 @@ import { PaperProvider } from 'react-native-paper';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import type { RootStackParamList } from './navigation/types';
-import { HeaderBackButton } from './components/HeaderBackButton';
 import { HomeScreen } from './screens/HomeScreen';
 import { ChatDetailScreen } from './screens/ChatDetailScreen';
 import { ProfileEditScreen } from './screens/ProfileEditScreen';
@@ -59,26 +58,12 @@ export default function App() {
               <Stack.Screen
                 name="ChatDetail"
                 component={ChatDetailScreen}
-                options={({ navigation, route }) => ({
-                  title: route.params.name,
-                  headerBackVisible: false,
-                  headerLeft: () => (
-                    <HeaderBackButton onPress={() => navigation.goBack()} />
-                  ),
-                  headerLeftContainerStyle: {
-                    backgroundColor: "transparent",
-                  },
-                  headerTitleStyle: {
-                    fontFamily: fonts.extraBold,
-                    fontWeight: '800',
-                    color: colors.orange,
-                  },
-                })}
+                options={{ headerShown: false }}
               />
               <Stack.Screen
                 name="ProfileEdit"
                 component={ProfileEditScreen}
-                options={{ title: 'Profil anpassen' }}
+                options={{ headerShown: false }}
               />
             </Stack.Navigator>
           </NavigationContainer>

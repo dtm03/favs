@@ -1,7 +1,10 @@
 import { Text, View } from 'react-native';
-import { LiquidGlassPill } from './LiquidGlassPill';
 import type { ChatPreview } from '../data/mockData';
+import { Pill } from './Pill';
+import { PillHeading } from './PillHeading';
 import { chatListItemStyles } from '../styles/ChatListItem.styles';
+import { PILL_ROW_HEIGHT } from '../theme/pills';
+import { textStyles } from '../theme/typography';
 
 type Props = {
   chat: ChatPreview;
@@ -12,19 +15,23 @@ export function ChatListItem({ chat, onPress }: Props) {
   const initial = chat.name.charAt(0).toUpperCase();
 
   return (
-    <LiquidGlassPill onPress={onPress} contentStyle={chatListItemStyles.row}>
+    <Pill
+      onPress={onPress}
+      height={PILL_ROW_HEIGHT}
+      contentStyle={chatListItemStyles.row}
+    >
       <View style={chatListItemStyles.avatar}>
         <Text style={chatListItemStyles.avatarText}>{initial}</Text>
       </View>
       <View style={chatListItemStyles.body}>
-        <View style={[chatListItemStyles.lineRow, chatListItemStyles.lineRowFirst]}>
-          <Text style={chatListItemStyles.name} numberOfLines={1}>
-            {chat.name}
+        <View style={chatListItemStyles.line}>
+          <PillHeading label={chat.name} style={chatListItemStyles.nameSlot} />
+          <Text style={[textStyles.pillMeta, chatListItemStyles.time]}>
+            {chat.time}
           </Text>
-          <Text style={chatListItemStyles.time}>{chat.time}</Text>
         </View>
-        <View style={chatListItemStyles.lineRow}>
-          <Text style={chatListItemStyles.preview} numberOfLines={1}>
+        <View style={chatListItemStyles.line}>
+          <Text style={[textStyles.pillValue, chatListItemStyles.preview]} numberOfLines={1}>
             {chat.lastMessage}
           </Text>
           <View style={chatListItemStyles.badgeSlot}>
@@ -36,6 +43,6 @@ export function ChatListItem({ chat, onPress }: Props) {
           </View>
         </View>
       </View>
-    </LiquidGlassPill>
+    </Pill>
   );
 }

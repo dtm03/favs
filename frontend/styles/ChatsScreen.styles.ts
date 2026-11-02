@@ -1,21 +1,15 @@
-import { StyleSheet } from "react-native";
-import { HOME_TAB_HORIZONTAL_PADDING } from "./HomeTabHeader.styles";
-
-/** Narrower than header — chat pills use more screen width */
-export const CHAT_LIST_HORIZONTAL_PADDING = 14;
+import { StyleSheet } from 'react-native';
+import { CONTENT_HORIZONTAL_PADDING, LIST_TOP_INSET } from '../theme/layout';
+import { PILL_GAP } from '../theme/pills';
 
 export const chatsScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  headerInset: {
-    paddingHorizontal: HOME_TAB_HORIZONTAL_PADDING,
   },
   list: {
-    gap: 10,
+    gap: PILL_GAP,
+    paddingTop: LIST_TOP_INSET,
     paddingBottom: 16,
-    paddingHorizontal: CHAT_LIST_HORIZONTAL_PADDING,
+    paddingHorizontal: CONTENT_HORIZONTAL_PADDING,
   },
 });

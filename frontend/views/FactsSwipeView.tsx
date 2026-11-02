@@ -18,7 +18,7 @@ type BubbleBox = {
   top: number;
   width: number;
   height: number;
-  cornerRadii: number;
+  cornerRadius: number;
 };
 
 function estimateBubbleSize(
@@ -52,7 +52,7 @@ function calculateBubblePositions(
   const tierHeight = usableHeight / rowCount;
 
   const boxes: BubbleBox[] = favs.map((fav, index) => {
-    const { width, height, cornerRadii } = estimateBubbleSize(
+    const { width, height, cornerRadius } = estimateBubbleSize(
       fav,
       profileId,
       index,
@@ -83,8 +83,9 @@ function calculateBubblePositions(
     const rY = pseudoRandom(baseSeed + index * 13 + 3);
     const rowTop = padding + row * tierHeight;
     const slackY = Math.max(4, tierHeight - height);
-    // Alternate which bubble in the row sits slightly higher
-    const verticalBias = isRight !== (row % 2 === 0) ? 0.15 : 0.65;
+    // Top row hugs the header; below that alternate which bubble sits higher
+    const verticalBias =
+      row === 0 ? 0.05 : isRight !== (row % 2 === 0) ? 0.15 : 0.65;
     const baseTop = rowTop + Math.min(slackY, Math.max(0, (verticalBias + (rY - 0.5) * 0.4) * slackY));
 
     return {
@@ -92,7 +93,7 @@ function calculateBubblePositions(
       top: Math.max(padding, Math.min(containerHeight - height - padding, baseTop)),
       width,
       height,
-      cornerRadii,
+      cornerRadius,
     };
   });
 
@@ -200,7 +201,7 @@ export function FactsSwipeView({ profile, exitProgress }: Props) {
                 item={fav}
                 width={pos.width}
                 height={pos.height}
-                cornerRadii={pos.cornerRadii}
+                cornerRadius={pos.cornerRadius}
               />
             </SwayingBubble>
           );
@@ -229,7 +230,7 @@ export function FactsSwipeView({ profile, exitProgress }: Props) {
                 item={fav}
                 width={pos.width}
                 height={pos.height}
-                cornerRadii={pos.cornerRadii}
+                cornerRadius={pos.cornerRadius}
               />
             </SwayingBubble>
           );

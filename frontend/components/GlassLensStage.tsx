@@ -1,11 +1,6 @@
-import React from "react";
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { colors } from "../theme/colors";
-import {
-  type BubbleCornerRadii,
-  cornerRadiiToStyle,
-  maxCornerRadius,
-} from "../theme/bubbleShapes";
+import React from 'react';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { colors } from '../theme/colors';
 
 /** Wider spread, lower opacity — reads as a soft shadow, not a ring */
 const SOFT_SHADOW_LAYERS = [
@@ -18,19 +13,15 @@ const SOFT_SHADOW_LAYERS = [
 
 type Props = {
   children: React.ReactNode;
+  cornerRadius: number;
+  /** Soft orange drop shadow — list rows and fav bubbles */
+  elevated?: boolean;
+  /** Host has a fixed height; fill it instead of growing with the content */
+  fillHeight?: boolean;
   style?: StyleProp<ViewStyle>;
-  /** Stadium / circle radius (typically min(width, height) / 2) */
-  cornerRadii?: BubbleCornerRadii;
-  variant?: "lightOrange" | "liquidClear" | "chatOrange";
 };
 
-function SoftShadowLayers({
-  borderRadius,
-  tint,
-}: {
-  borderRadius: number;
-  tint: "orange" | "neutral";
-}) {
+function SoftShadowLayers({ borderRadius }: { borderRadius: number }) {
   const lift = 5;
   return (
     <>
@@ -39,16 +30,13 @@ function SoftShadowLayers({
           key={spread}
           pointerEvents="none"
           style={{
-            position: "absolute",
+            position: 'absolute',
             top: -spread + lift,
             left: -spread,
             right: -spread,
             bottom: -spread - lift,
             borderRadius: borderRadius + spread,
-            backgroundColor:
-              tint === "orange"
-                ? colors.orangeAlpha(opacity * 1.15)
-                : `rgba(80, 72, 66, ${opacity * 0.9})`,
+            backgroundColor: colors.orangeAlpha(opacity * 1.15),
           }}
         />
       ))}
@@ -56,43 +44,36 @@ function SoftShadowLayers({
   );
 }
 
-/**
- * Glass shell: light-orange plate + soft even fade shadow (no solid halo ring).
- */
+/** Pill shell: orange rim, clipping, and the optional soft outer shadow. */
 export function GlassLensStage({
   children,
+  cornerRadius,
+  elevated = false,
+  fillHeight = false,
   style,
-  cornerRadii = 999,
-  variant = "lightOrange",
 }: Props) {
-  const isLiquidClear = variant === "liquidClear";
-  const isLightOrange = variant === "lightOrange";
-  const isChatOrange = variant === "chatOrange";
-  const radiusStyle = cornerRadiiToStyle(cornerRadii);
-  const shadowRadius = maxCornerRadius(cornerRadii);
-  const hasOrangeRim = isLightOrange || isChatOrange;
-  const sizeToContent = isLiquidClear || isChatOrange;
+  const fill = fillHeight ? styles.fillHeight : null;
 
   return (
-    <View style={[styles.host, style]}>
-      <View style={[styles.shadowCast, sizeToContent && styles.shadowCastContent]}>
-        {hasOrangeRim && Platform.OS !== "ios" ? (
-          <SoftShadowLayers borderRadius={shadowRadius} tint="orange" />
+    <View style={[styles.host, fill, style]}>
+      <View style={[styles.shadowCast, fill]}>
+        {elevated && Platform.OS !== 'ios' ? (
+          <SoftShadowLayers borderRadius={cornerRadius} />
         ) : null}
         <View
           style={[
-            styles.shadowSurface,
-            sizeToContent ? styles.frameContent : styles.frame,
-            radiusStyle,
-            hasOrangeRim ? styles.orangeShadow : styles.liquidClearShadow,
+            styles.frame,
+            fill,
+            { borderRadius: cornerRadius },
+            elevated && styles.elevated,
           ]}
         >
           <View
             style={[
-              sizeToContent ? styles.frameContent : styles.frame,
-              radiusStyle,
-              hasOrangeRim ? styles.clip : styles.clipBorderless,
-              hasOrangeRim && styles.rimBorder,
+              styles.frame,
+              fill,
+              styles.rim,
+              { borderRadius: cornerRadius },
             ]}
           >
             {children}
@@ -103,7 +84,7 @@ export function GlassLensStage({
   );
 }
 
-const iosBubbleShadow = Platform.select({
+const iosShadow = Platform.select({
   ios: {
     shadowColor: colors.orange,
     shadowOffset: { width: 0, height: 7 },
@@ -113,57 +94,28 @@ const iosBubbleShadow = Platform.select({
   default: {},
 });
 
-const iosLiquidClearShadow = Platform.select({
-  ios: {
-    shadowColor: colors.muted,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-  },
-  default: {},
-});
-
 const styles = StyleSheet.create({
   host: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
   shadowCast: {
-    position: "relative",
-    width: "100%",
-    height: "100%",
-  },
-  shadowCastContent: {
-    height: undefined,
-  },
-  frameContent: {
-    width: "100%",
-  },
-  shadowSurface: {
-    backgroundColor: "transparent",
-  },
-  orangeShadow: {
-    ...iosBubbleShadow,
+    position: 'relative',
+    width: '100%',
   },
   frame: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    backgroundColor: 'transparent',
   },
-  clip: {
-    overflow: "hidden",
+  fillHeight: {
+    height: '100%',
+  },
+  elevated: {
+    ...iosShadow,
+  },
+  rim: {
+    overflow: 'hidden',
+    position: 'relative',
     borderWidth: StyleSheet.hairlineWidth * 2,
-    position: "relative",
-    backgroundColor: "transparent",
-  },
-  clipBorderless: {
-    overflow: "hidden",
-    borderWidth: 0,
-    position: "relative",
-    backgroundColor: "transparent",
-  },
-  rimBorder: {
     borderColor: colors.orange,
-  },
-  liquidClearShadow: {
-    ...iosLiquidClearShadow,
   },
 });

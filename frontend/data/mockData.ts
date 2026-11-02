@@ -8,7 +8,9 @@ export type FavCategory =
   | "Schulfach"
   | "Sprache"
   | "Bar"
-  | "Restaurant";
+  | "Restaurant"
+  | "Tier"
+  | "Buch";
 
 export type FavItem = {
   category: FavCategory;
@@ -57,6 +59,8 @@ export const sampleProfile: Profile = {
     { category: "Sprache", value: "Portugiesisch" },
     { category: "Bar", value: "Würgeengel" },
     { category: "Restaurant", value: "Cookies Cream" },
+    { category: "Tier", value: "Katze" },
+    { category: "Buch", value: "Ocean Sea" },
   ],
   photoUrls: [
     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
@@ -83,6 +87,8 @@ export const peterProfile: Profile = {
     { category: "Sprache", value: "Englisch" },
     { category: "Bar", value: "Biergarten" },
     { category: "Restaurant", value: "Sushi Koi" },
+    { category: "Tier", value: "Hund" },
+    { category: "Buch", value: "Sapiens" },
   ],
   photoUrls: [
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
